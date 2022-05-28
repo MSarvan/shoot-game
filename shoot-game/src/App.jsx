@@ -8,10 +8,6 @@ function App() {
       </div>
       <div className='circles'>
         <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
       </div>
       <div className='inp'>
         <input type="number" />
