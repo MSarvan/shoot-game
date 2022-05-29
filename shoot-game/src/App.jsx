@@ -5,12 +5,12 @@ function App() {
 
   const [colorArr, setColorArr] = useState([]);
   const [num, setNum] = useState("");
-  const [ballonColor, setBallonColor] = useState([]);
+  const [colours, setColours] = useState([]);
 
   const colorpick = () => {
     var colors = [];
+    let tem = [];
     for (let i = 0; i < 5; i++) {
-      let tem = [];
       let tem1 = Math.floor(Math.random() * 255 + 1);
       let tem2 = Math.floor(Math.random() * 255 + 1);
       let tem3 = Math.floor(Math.random() * 255 + 1);
@@ -19,7 +19,8 @@ function App() {
       tem.push(str);
       if (colors.length < 5) colors.push(tem);
     }
-    setColorArr(colors);
+    setColorArr(tem);
+    // console.log(tem);
   };
 
   useEffect(() => {
@@ -27,20 +28,29 @@ function App() {
   }, []);
 
   const handleChangecolor = () => {
-    if (num > 5) return alert("Please select the value from 1 to 5");
-    setBallonColor(colorArr[num - 1]);
+    let temp = colours;
+  if (num > colorArr.length) return alert(`Please select the value from 1 to ${colorArr.length}`);
     let colorfilter;
-    colorfilter = colorArr.filter((e) => e != colorArr[num - 1]);
+    colorfilter = colorArr.filter((e) => {
+      if(e == colorArr[num - 1]) {
+        temp.push(e);
+      }
+      if(e != colorArr[num - 1]) return e;
+    });
     setColorArr(colorfilter);
+    setColours(temp);
   };
 
   return (
     <div className="App">
-      <div className='box' style={{ backgroundColor: `rgb(${ballonColor[0]})` }}>
+      <div className='box'>
+        {colours.map((e,i) => (
+          <div key={i} style={{ backgroundColor: `rgb(${e})` }} ></div>
+        ))}
       </div>
       <div className='circles'>
       {colorArr.map((e, i) => (
-          <div key={i} style={{ backgroundColor: `rgb(${colorArr[i]})` }}></div>
+          <div key={i} style={{ backgroundColor: `rgb(${e})` }}></div>
         ))}
       </div>
       <div className='inp'>
