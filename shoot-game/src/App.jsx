@@ -1,66 +1,69 @@
-import { useEffect, useState } from 'react';
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
-
-  const [colorArr, setColorArr] = useState([]);
+  const [randomcolor, setRandomcolor] = useState([]);
   const [num, setNum] = useState("");
-  const [colours, setColours] = useState([]);
+  const [selectedcolor, setSelectedcolor] = useState([]);
 
-  const colorpick = () => {
+  const colorpicker = () => {
     var colors = [];
     let tem = [];
     for (let i = 0; i < 5; i++) {
-      let tem1 = Math.floor(Math.random() * 255 + 1);
-      let tem2 = Math.floor(Math.random() * 255 + 1);
-      let tem3 = Math.floor(Math.random() * 255 + 1);
+      let red = Math.floor(Math.random() * 255 + 1);
+      let blue = Math.floor(Math.random() * 255 + 1);
+      let green = Math.floor(Math.random() * 255 + 1);
 
-      let str = tem1 + "," + tem2 + "," + tem3;
+      let str = red + "," + blue + "," + green;
       tem.push(str);
       if (colors.length < 5) colors.push(tem);
     }
-    setColorArr(tem);
+    setRandomcolor(tem);
     // console.log(tem);
   };
 
   useEffect(() => {
-    colorpick();
+    colorpicker();
   }, []);
 
   const handleChangecolor = () => {
-    let temp = colours;
-  if (num > colorArr.length) return alert(`Please select the value from 1 to ${colorArr.length}`);
+    let temp = selectedcolor;
+    if (num > randomcolor.length)
+      return alert(`Please select the value from 1 to ${randomcolor.length}`);
     let colorfilter;
-    colorfilter = colorArr.filter((e) => {
-      if(e == colorArr[num - 1]) {
+    colorfilter = randomcolor.filter((e) => {
+      if (e == randomcolor[num - 1]) {
         temp.push(e);
       }
-      if(e != colorArr[num - 1]) return e;
+      if (e != randomcolor[num - 1]) return e;
     });
-    setColorArr(colorfilter);
-    setColours(temp);
+    setRandomcolor(colorfilter);
+    setSelectedcolor(temp);
   };
 
   return (
     <div className="App">
-      <div className='box'>
-        {colours.map((e,i) => (
-          <div key={i} style={{ backgroundColor: `rgb(${e})` }} ></div>
-        ))}
-      </div>
-      <div className='circles'>
-      {colorArr.map((e, i) => (
+      <div className="box">
+        {selectedcolor.map((e, i) => (
           <div key={i} style={{ backgroundColor: `rgb(${e})` }}></div>
         ))}
       </div>
-      <div className='inp'>
-        <input type="number" value={num}
-          onChange={(e) => setNum(e.target.value)}/>
+      <div className="circles">
+        {randomcolor.map((e, i) => (
+          <div key={i} style={{ backgroundColor: `rgb(${e})` }}></div>
+        ))}
+      </div>
+      <div className="inp">
+        <input
+          type="number"
+          value={num}
+          onChange={(e) => setNum(e.target.value)}
+        />
         <br />
         <button onClick={handleChangecolor}>Shoot</button>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
