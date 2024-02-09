@@ -18,9 +18,8 @@ function App() {
       tem.push(str);
       if (colors.length < 5) colors.push(tem);
     }
-    console.log(tem, 'color');
     setRandomcolor(tem);
-    // console.log(tem);
+    console.log(tem);
   };
 
   useEffect(() => {
@@ -55,6 +54,8 @@ function App() {
         ))}
       </div>
       <div className="inp">
+        <div>Enter a number from 1 to {randomcolor?.length} </div>
+        <br />
         <input
           type="number"
           value={num}
