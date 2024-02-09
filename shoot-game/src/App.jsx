@@ -18,6 +18,7 @@ function App() {
       tem.push(str);
       if (colors.length < 5) colors.push(tem);
     }
+    console.log(tem, 'color');
     setRandomcolor(tem);
     // console.log(tem);
   };
