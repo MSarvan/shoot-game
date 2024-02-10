@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import balloons from "./balloons.png";
+import balloons1 from "./balloons1.png";
+import balloons2 from "./balloon2.png";
 
 function App() {
   const [randomcolor, setRandomcolor] = useState([]);
   const [num, setNum] = useState("");
   const [selectedcolor, setSelectedcolor] = useState([]);
+  const [showInstruction, setShowInsruction] = useState(false);
 
   const colorpicker = () => {
     var colors = [];
@@ -41,8 +45,29 @@ function App() {
     setSelectedcolor(temp);
   };
 
+  const handleReset = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="App">
+      <div className="instruction-textbox">
+        <div className="title">
+          {" "}
+          <span style={{ width: "75px", display: "flex" }}>
+            <img src={balloons1} alt="" style={{ width: "100%" }} />
+          </span>{" "}
+          <span>Balloon Shooter</span>
+        </div>
+        <div
+          className="instruction-btn"
+          onClick={() => {
+            setShowInsruction(true);
+          }}
+        >
+          Click here to see instructions
+        </div>
+      </div>
       <div className="box">
         {selectedcolor.map((e, i) => (
           <div key={i} style={{ backgroundColor: `rgb(${e})` }}></div>
@@ -54,16 +79,56 @@ function App() {
         ))}
       </div>
       <div className="inp">
-        <div>Enter a number from 1 to {randomcolor?.length} </div>
-        <br />
+        {randomcolor?.length > 1 && (
+          <>
+            <div>Enter a number from 1 to {randomcolor?.length} </div>
+            <br />
+          </>
+        )}
         <input
           type="number"
           value={num}
           onChange={(e) => setNum(e.target.value)}
         />
         <br />
-        <button onClick={handleChangecolor}>Shoot</button>
+        <button className="shoot-btn" onClick={handleChangecolor}>
+          Shoot
+        </button>
+        <button className="reset-btn" onClick={handleReset}>
+          Reset
+        </button>
       </div>
+
+      {showInstruction && (
+        <div className="overlay">
+          <div className="instruction-container">
+            <div className="instruction-text">Instructions</div>
+            <div>
+              1. Enter a number ranging 1 to 5, as it represent the balloons
+              from top to bottom.
+            </div>
+            <div>
+              2. Click on the Shoot button to shoot the balloon into the box.
+            </div>
+            <div>
+              3. If you want a balloon in the box to be restored, click on that
+              particular balloon in the box.
+            </div>
+            <div>4. Click on the Reset button to restart the game.</div>
+            <br />
+            <div className="close-btn-container">
+              <div
+                className="close-btn"
+                onClick={() => {
+                  setShowInsruction(false);
+                }}
+              >
+                Close
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
