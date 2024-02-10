@@ -89,6 +89,7 @@
   height: 75px;
   border: transparent;
   border-radius: 50%;
+  cursor: pointer;
 }
 .circles {
   padding: 50px;
