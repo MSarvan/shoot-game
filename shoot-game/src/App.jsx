@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import balloons from "./balloons.png";
 import balloons1 from "./balloons1.png";
-import balloons2 from "./balloon2.png";
 
 function App() {
   const [randomcolor, setRandomcolor] = useState([]);
@@ -69,10 +67,7 @@ function App() {
           Click here to see instructions
         </div>
       </div>
-      <div
-        className="box"
-        // style={{ border: selectedcolor?.length > 0 ? "1px solid thistle" : "" }}
-      >
+      <div className="box">
         {selectedcolor.map((e, i) => (
           <div key={i} style={{ backgroundColor: `rgb(${e})` }}></div>
         ))}
