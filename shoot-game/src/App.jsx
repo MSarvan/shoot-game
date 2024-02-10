@@ -43,7 +43,7 @@ function App() {
     });
     setRandomcolor(colorfilter);
     setSelectedcolor(temp);
-    setNum('');
+    setNum("");
   };
 
   const handleReset = () => {
@@ -69,7 +69,10 @@ function App() {
           Click here to see instructions
         </div>
       </div>
-      <div className="box">
+      <div
+        className="box"
+        // style={{ border: selectedcolor?.length > 0 ? "1px solid thistle" : "" }}
+      >
         {selectedcolor.map((e, i) => (
           <div key={i} style={{ backgroundColor: `rgb(${e})` }}></div>
         ))}
