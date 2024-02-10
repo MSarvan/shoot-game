@@ -43,6 +43,7 @@ function App() {
     });
     setRandomcolor(colorfilter);
     setSelectedcolor(temp);
+    setNum('');
   };
 
   const handleReset = () => {
@@ -82,6 +83,12 @@ function App() {
         {randomcolor?.length > 1 && (
           <>
             <div>Enter a number from 1 to {randomcolor?.length} </div>
+            <br />
+          </>
+        )}
+        {randomcolor?.length === 1 && (
+          <>
+            <div>Enter 1 to shoot the balloon</div>
             <br />
           </>
         )}
