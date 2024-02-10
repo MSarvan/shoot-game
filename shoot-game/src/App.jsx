@@ -21,7 +21,7 @@ function App() {
       if (colors.length < 5) colors.push(tem);
     }
     setRandomcolor(tem);
-    console.log(tem);
+    // console.log(tem);
   };
 
   useEffect(() => {
@@ -48,6 +48,12 @@ function App() {
     window.location.reload();
   };
 
+  const handleReshoot = (color) => {
+    // console.log(color, "selected balloon color");
+    setRandomcolor((prev) => [...prev, color]);
+    setSelectedcolor(prev => prev.filter(e => e !== color));
+  };
+
   return (
     <div className="App">
       <div className="instruction-textbox">
@@ -69,7 +75,13 @@ function App() {
       </div>
       <div className="box">
         {selectedcolor.map((e, i) => (
-          <div key={i} style={{ backgroundColor: `rgb(${e})` }}></div>
+          <div
+            key={i}
+            style={{ backgroundColor: `rgb(${e})` }}
+            onClick={() => {
+              handleReshoot(e);
+            }}
+          ></div>
         ))}
       </div>
       <div className="circles">
